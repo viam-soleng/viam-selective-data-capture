@@ -18,7 +18,7 @@ class ColorFilterCam(Camera, Reconfigurable):
     """A ColorFilterCam wraps the underlying camera `actual_cam` and only keeps the data captured on the actual camera if `vision_service`
     detects a certain color in the captured image.
     """
-    MODEL: ClassVar[Model] = Model(ModelFamily("example", "camera"), "colorfilter")
+    MODEL: ClassVar[Model] = Model(ModelFamily("felix-home-registry", "camera"), "colorfilter")
 
     def __init__(self, name: str):
         super().__init__(name)
