@@ -1,7 +1,6 @@
-# VIAM - Selective Data Capture
+# VIAM - Selective Image Capture
 
-Demo scenarios / examples around Viam's data capture possibilities.
+This repo contains a simple camera component which filters before storing and uploading them into the Viam cloud.
+It takes a camera component and vision service running a detection model as input. The camera image is handed over to the vision service and if the vision service returns # detections > 0 it skips the storing/uploading procedure.
 
-1. Scenario - Selective Image Capture
 
-2. Work in progress
