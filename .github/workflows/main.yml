@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: build
-      run: make module.tar.gz
+      run: tar -czf module.tar.gz run.sh requirements.txt src
     - name: upload
       if: ${{ github.event_name == 'release' }}
       uses: viamrobotics/upload-module@main
