@@ -1,0 +1,13 @@
+{
+  "module_id": "felix-home-registry:viam-data-filter",
+  "visibility": "private",
+  "url": "https://github.com/felixreichenbach/viam-data-filter",
+  "description": "Data filtering examples.",
+  "models": [
+    {
+      "api": "rdk:component:camera",
+      "model": "viam-soleng:camera:imagefilter"
+    }
+  ],
+  "entrypoint": "run.sh"
+}

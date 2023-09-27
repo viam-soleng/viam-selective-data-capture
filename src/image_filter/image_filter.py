@@ -14,11 +14,11 @@ from viam.errors import NoCaptureToStoreError
 from viam.services.vision import Vision
 from viam.utils import from_dm_from_extra
 
-class ColorFilterCam(Camera, Reconfigurable):
-    """A ColorFilterCam wraps the underlying camera `actual_cam` and only keeps the data captured on the actual camera if `vision_service`
-    detects a certain color in the captured image.
+class ImageFilterCam(Camera, Reconfigurable):
+    """A ImageFilterCam wraps the underlying camera `actual_cam` and only keeps the data captured on the actual camera if `vision_service`
+    detects a certain number of detections in the captured image.
     """
-    MODEL: ClassVar[Model] = Model(ModelFamily("felix-home-registry", "camera"), "colorfilter")
+    MODEL: ClassVar[Model] = Model(ModelFamily("viam-soleng", "camera"), "imagefilter")
 
     def __init__(self, name: str):
         super().__init__(name)
@@ -34,10 +34,10 @@ class ColorFilterCam(Camera, Reconfigurable):
         """Validates JSON configuration"""
         actual_cam = config.attributes.fields["actual_cam"].string_value
         if actual_cam == "":
-            raise Exception("actual_cam attribute is required for a ColorFilterCam component")
+            raise Exception("actual_cam attribute is required for a ImageFilterCam component")
         vision_service = config.attributes.fields["vision_service"].string_value
         if vision_service == "":
-            raise Exception("vision_service attribute is required for a ColorFilterCam component")
+            raise Exception("vision_service attribute is required for a ImageFilterCam component")
         return [actual_cam, vision_service]
     
     def reconfigure(self, config: ComponentConfig, dependencies: Mapping[ResourceName, ResourceBase]):
@@ -61,7 +61,6 @@ class ColorFilterCam(Camera, Reconfigurable):
             detections = await self.vision_service.get_detections(img)
             if len(detections) == 0:
                 raise NoCaptureToStoreError()
-        
         return img
 
     async def get_images(self, *, timeout: Optional[float] = None, **kwargs) -> Tuple[List[NamedImage], ResponseMetadata]:
