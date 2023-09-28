@@ -17,7 +17,7 @@ jobs:
     - name: build
       run: tar -czf module.tar.gz run.sh requirements.txt src
     - name: upload
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'release' }}
       uses: viamrobotics/upload-module@main
       with:
         module-path: module.tar.gz
